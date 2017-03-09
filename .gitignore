@@ -6,3 +6,6 @@
 *.so
 *.gem
 *.tmproj
+Gemfile.lock
+pkg
+tmp
