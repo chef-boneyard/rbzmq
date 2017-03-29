@@ -19,8 +19,10 @@
 require 'mkmf'
 dir_config('zmq')
 
+RbConfig::MAKEFILE_CONFIG['CC'] = ENV['CC'] if ENV['CC']
+
 $CFLAGS += ' -std=c99'
-CONFIG['warnflags'].gsub!(/-Wdeclaration-after-statement|-Wunused-parameter/, '') if CONFIG['warnflags']
+RbConfig::MAKEFILE_CONFIG['warnflags'].gsub!(/-Wdeclaration-after-statement|-Wunused-parameter/, '') if CONFIG['warnflags']
 
 def header?
   have_header('zmq.h') ||
@@ -38,5 +40,3 @@ if header? && library?
 else
   raise "Couldn't find zmq library. try setting --with-zmq-dir=<path> to tell me where it is."
 end
-
-
