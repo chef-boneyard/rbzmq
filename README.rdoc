@@ -1,3 +1,17 @@
+= Background for this fork
+
+Normally building push-jobs-client[https://github.com/chef/opscode-pushy-client] depends on using ffi-rzmq[https://github.com/chuckremes/ffi-rzmq]
+but to get FFI building on AIX was more work than we could commit to. To meet a customer need we decided to build a custom
+C extension for the parts of ZeroMQ that we need.
+
+We actually have a fairly small use case for ZMQ in Push Jobs Client. There are
+two sockets, one subscriber and one dealer. The dealer needs to send encrypted
+information to the server. That is basically it.
+
+This small footprint led us to creating this repo which is a fork of an old C native extension of LibZMQ https://github.com/jtobin/rbzmq and modifying
+it to fit our needs. This meant ripping out any unused code and updating only the methods we need (like context.socket) to
+support later versions of Ruby and LibZMQ.
+
 = ZeroMQ Ruby Bindings
 
 ZeroMQ http://www.zeromq.org/

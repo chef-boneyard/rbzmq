@@ -960,6 +960,11 @@ static VALUE poller_poll (VALUE self_, VALUE timeout_)
 
 void Init_zmq ()
 {
+    // This exists to mimic how ffi-rzmq's `LibZMQ.version` is used
+    // reference: https://github.com/chuckremes/ffi-rzmq-core/blob/1.0.5/lib/ffi-rzmq-core/utilities.rb#L11-L21
+    VALUE libzmq_module = rb_define_module ("LibZMQ");
+    rb_define_singleton_method (libzmq_module, "version", module_version, 0);
+
     VALUE zmq_module = rb_define_module ("ZMQ");
     rb_define_singleton_method (zmq_module, "version", module_version, 0);
 
@@ -979,7 +984,7 @@ void Init_zmq ()
     rb_define_method (socket_type, "setsockopt", socket_setsockopt, 2);
     rb_define_method (socket_type, "connect", socket_connect, 1);
     rb_define_method (socket_type, "send_string", socket_send, -1);
-    rb_define_method (socket_type, "recv_string", socket_recv, -1);
+    rb_define_method (socket_type, "receive_string", socket_recv, -1);
     rb_define_method (socket_type, "close", socket_close, 0);
     rb_define_method (socket_type, "more_parts?", socket_more_parts, 0);
 
