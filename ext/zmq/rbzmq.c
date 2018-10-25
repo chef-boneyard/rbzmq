@@ -1006,6 +1006,7 @@ void Init_zmq ()
     rb_define_const (zmq_module, "LINGER", INT2NUM (ZMQ_LINGER));
     rb_define_const (zmq_module, "RCVHWM", INT2NUM (ZMQ_RCVHWM));
     rb_define_const (zmq_module, "SNDHWM", INT2NUM (ZMQ_SNDHWM));
+    rb_define_const (zmq_module, "DONTWAIT", INT2NUM (ZMQ_DONTWAIT));
     rb_define_const (zmq_module, "CURVE_SERVERKEY", INT2NUM (ZMQ_CURVE_SERVERKEY));
     rb_define_const (zmq_module, "CURVE_PUBLICKEY", INT2NUM (ZMQ_CURVE_PUBLICKEY));
     rb_define_const (zmq_module, "CURVE_SECRETKEY", INT2NUM (ZMQ_CURVE_SECRETKEY));
